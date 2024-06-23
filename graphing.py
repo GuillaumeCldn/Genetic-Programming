@@ -11,7 +11,19 @@ import matplotlib.pyplot as plt
 
 
 def draw_tree(tree):
-    """Draws the graph correspponding to the tree."""
+    """
+    Draws the graph correspponding to the tree.
+
+    Parameters
+    ----------
+    tree : <class: Tree>
+        A tree.
+
+    Returns
+    -------
+    None.
+
+    """
     n = tree.length
     n_vertices = 1
     depth = tree.depth
@@ -49,8 +61,25 @@ def draw_tree(tree):
 
 
 def draw_function(tree, param_list, Y_ref):
-    """Draws the function corresponding to the tree,
-    as well as the reference function."""
+    """
+    Draws the function corresponding to the tree, as well as the reference.
+
+    Parameters
+    ----------
+    tree : <class: Tree>
+        A tree.
+    param_list : list
+        The list of parameters to be taken into account.
+        Defined in data.py
+    Y_ref : numpy.ndarray
+        Array containing values of the refence function.
+        Defined in data.py
+
+    Returns
+    -------
+    None.
+
+    """
     n = len(param_list[0].values)
     X = param_list[0].values
     Y = tree.evaluate()
