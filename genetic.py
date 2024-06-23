@@ -33,9 +33,9 @@ def tournament(list_tree):
     k = rd.randint(1, len(list_tree))
     weight_pop = weight(list_tree)
     chosen_keep = rd.sample([tree for tree in list_tree],
-                             k,
-                             counts=[weight_pop[i][0] for i in range(len(weight_pop))]
-                             )
+                            k,
+                            counts=[weight_pop[i][0] for i in range(len(weight_pop))]
+                            )
     return min_fit(chosen_keep)
 
 
