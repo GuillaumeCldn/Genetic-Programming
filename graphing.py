@@ -18,7 +18,7 @@ def draw_tree(tree):
     ----------
     tree : <class: Tree>
         A tree.
-
+        Defined in objects.py
     Returns
     -------
     None.
@@ -66,8 +66,9 @@ def draw_function(tree, param_list, Y_ref):
 
     Parameters
     ----------
-    tree : <class: Tree>
+    tree : Tree
         A tree.
+        Defined in objects.py
     param_list : list
         The list of parameters to be taken into account.
         Defined in data.py
