@@ -43,7 +43,7 @@ family_size = 15
 
 accuracy = 10**(-4)
 depth_init = 2
-max_depth = 3
+max_depth = 4
 max_it = 500
 
 mutate_rate = 0.5
