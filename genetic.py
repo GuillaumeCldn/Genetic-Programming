@@ -44,7 +44,7 @@ def weight(list_tree):
     size = len(list_tree)
     fit_pop = [fitness(list_tree[i]) for i in range(size)]
     total_fit = sum(fit_pop)
-    weight_pop = [(int(100*(total_fit-fitness(list_tree[i]))
+    weight_pop = [(int(100*(total_fit - fitness(list_tree[i]))
                        / ((size-1)*total_fit)),
                    list_tree[i]) for i in range(size)
                   ]
