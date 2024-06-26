@@ -52,6 +52,8 @@ def weight(list_tree):
 
 
 def min_fit(pop):
+    if not pop:
+        raise ValueError("pop (arg of min_fit()) list is empty")
     fit_pop = [(fitness(pop[i]), i, pop[i]) for i in range(len(pop))]
     minfit = min(fit_pop)
     return minfit
