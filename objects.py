@@ -45,8 +45,7 @@ class Tree:
             right_child = 2 * cp + 2
 
             children += self.get_children(left_child
-                                          ) + self.get_children(right_child
-                                                                )
+                                          ) + self.get_children(right_child)
 
         children.sort()
         return children

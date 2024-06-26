@@ -37,12 +37,15 @@ def protect_div(a, b):
 X = ob.Node('parameter', 'x', np.linspace(-np.pi/2, np.pi/2, 500))
 param_list = [X]
 Y_ref = np.sin(X.values)**2 + np.sin(X.values) + 1
-family_size = 15
 cst_list = constants(-5, 5, 10)
+
+family_size = 15
+
 accuracy = 10**(-4)
 depth_init = 2
 max_depth = 3
 max_it = 500
+
 mutate_rate = 0.5
 fuse_rate = 0.25
-affichage = 4
+display_rate = 4

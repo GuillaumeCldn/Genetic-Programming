@@ -32,12 +32,24 @@ class intervalle_coupe:
             sup2 = np.array([max(self.intervalle1.sup,
                                  self.intervalle2.sup
                                  )]*size)
-            return ((inf1 < x).any() and (x < sup1).any()) or ((inf2 < x).any() and (x < sup2).any())
+            return ((inf1 < x).any() and (x < sup1).any()
+                    ) or ((inf2 < x).any() and (x < sup2).any()
+                          )
         else:
-            return (min(self.intervalle1.inf,self.intervalle2.inf) < x < self.inf2) or (self.sup2 < x < max(self.intervalle1.sup,self.intervalle2.sup))
+            return (min(self.intervalle1.inf,
+                        self.intervalle2.inf
+                        ) < x < self.inf2
+                    ) or (self.sup2 < x < max(self.intervalle1.sup,
+                                              self.intervalle2.sup
+                                              )
+                          )
 
     def __repr__(self):
-      return "]" + str(min(self.intervalle1.inf,self.intervalle2.inf)) + ":" + str(self.inf2) + "[" + "U" + "]" + str(self.sup2) + ":" + str(max(self.intervalle1.sup,self.intervalle2.sup)) + "["
+        lower_bound1 = str(min(self.intervalle1.inf, self.intervalle2.inf))
+        upper_bound1 = str(self.inf2)
+        lower_bound2 = str(self.sup2)
+        upper_bound2 = str(max(self.intervalle1.sup, self.intervalle2.sup))
+        return f']{lower_bound1}:{upper_bound1}[U{lower_bound2}:{upper_bound2}['
 
 
 class intervalle_ouvert:

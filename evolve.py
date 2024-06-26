@@ -36,7 +36,11 @@ def fuse(tree_ini, tree_add):
     firs_el_last_level_t_add = 2**t_add.depth - 1
     max_cp_add = firs_el_last_level_t_add - 1
     cp_add = rd.randint(min_cp_add, max_cp_add)
-    while t_add.nodes[cp_add].data_type == 'None' or t_add.nodes[cp_add].data_type == 'constant' or t_add.nodes[cp_add].data_type == 'parameter':
+
+    while (t_add.nodes[cp_add].data_type == 'None'
+           ) or (t_add.nodes[cp_add].data_type == 'constant'
+                 ) or (t_add.nodes[cp_add].data_type == 'parameter'
+                       ):
         cp_add = rd.randint(min_cp_add, max_cp_add)
 
     children_add = t_add.get_children(cp_add)

@@ -34,7 +34,8 @@ def tournament(list_tree):
     weight_pop = weight(list_tree)
     chosen_keep = rd.sample([tree for tree in list_tree],
                             k,
-                            counts=[weight_pop[i][0] for i in range(len(weight_pop))]
+                            counts=[weight_pop[i][0]
+                                    for i in range(len(weight_pop))]
                             )
     return min_fit(chosen_keep)
 
@@ -43,7 +44,8 @@ def weight(list_tree):
     size = len(list_tree)
     fit_pop = [fitness(list_tree[i]) for i in range(size)]
     total_fit = sum(fit_pop)
-    weight_pop = [(int(100*(total_fit-fitness(list_tree[i]))/((size-1)*total_fit)),
+    weight_pop = [(int(100*(total_fit-fitness(list_tree[i]))
+                       / ((size-1)*total_fit)),
                    list_tree[i]) for i in range(size)
                   ]
     return weight_pop
@@ -56,42 +58,64 @@ def min_fit(pop):
 
 
 def genetic():
-    pop = generate_population(d.family_size//2, 1) + generate_population(d.family_size - d.family_size//2 , 0)
+    pop = generate_population(d.family_size//2, 1
+                              ) + generate_population(d.family_size
+                                                      - d.family_size//2, 0
+                                                      )
     minfit = min_fit(pop)
     best_tree = minfit[2]
     best_tree2 = best_tree
     it = 0
     fit = [minfit[0]]
+
     while fitness(best_tree2) > d.accuracy:
         it += 1
         print(f'iteration = {it}')
         new_gen = []
+
         if it >= d.max_it:
             print(f'max iteration reached: {it}, fitness = {fit[-1]})')
             return (best_tree2, fit)
+
         for tree in pop:
             tree.delete_line()
+
         weight_tree = weight(pop)
         num_mutate = int(d.family_size*d.mutate_rate)
-        chosen_mutate = rd.sample([tree for tree in pop], num_mutate, counts=[weight_tree[i][0] for i in range (d.family_size)])
+
+        chosen_mutate = rd.sample([tree for tree in pop], num_mutate, counts=[
+                                  weight_tree[i][0] for i in range(d.family_size
+                                                                   )
+                                  ])
         for chosen in chosen_mutate:
-            new_gen.append(evolve.mutate(d.func_list, d.param_list, d.cst_list, chosen))
+            new_gen.append(evolve.mutate(
+                d.func_list, d.param_list, d.cst_list, chosen))
+
         num_fuse = int(d.family_size*d.fuse_rate)
+
         for i in range(num_fuse):
             parent1 = tournament(pop)[2]
             parent2 = tournament(pop)[2]
             new_gen.append(evolve.fuse(parent1, parent2))
+
         num_keep = d.family_size - num_fuse - num_mutate
-        chosen_keep = rd.sample([tree for tree in pop], num_keep, counts=[weight_tree[i][0] for i in range (d.family_size)])
+
+        chosen_keep = rd.sample([tree for tree in pop], num_keep, counts=[
+                                weight_tree[i][0] for i in range(d.family_size)
+                                ])
         for chosen in chosen_keep:
             new_gen.append(chosen)
+
         pop = new_gen[:]
         minfit = min_fit(pop)
         best_tree = minfit[2]
+
         if fitness(best_tree) < fitness(best_tree2):
             best_tree2 = best_tree
+
         fit.append(fitness(best_tree2))
-        if it % (d.max_it//d.affichage) == 0:
+
+        if it % (d.max_it//d.display_rate) == 0:
             gr.draw_tree(best_tree2)
             gr.draw_function(best_tree2, d.param_list, d.Y_ref)
 
