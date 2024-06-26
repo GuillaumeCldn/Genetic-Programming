@@ -48,4 +48,5 @@ max_it = 500
 
 mutate_rate = 0.5
 fuse_rate = 0.25
-display_rate = 4
+drawing_display_rate = 4
+iteration_display_rate = 25

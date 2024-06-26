@@ -70,7 +70,8 @@ def genetic():
 
     while fitness(best_tree2) > d.accuracy:
         it += 1
-        print(f'iteration = {it}')
+        if it % d.iteration_display_rate == 0:
+            print(f'iteration = {it}')
         new_gen = []
 
         if it >= d.max_it:
@@ -115,7 +116,7 @@ def genetic():
 
         fit.append(fitness(best_tree2))
 
-        if it % (d.max_it//d.display_rate) == 0:
+        if it % (d.max_it//d.drawing_display_rate) == 0:
             gr.draw_tree(best_tree2)
             gr.draw_function(best_tree2, d.param_list, d.Y_ref)
 
