@@ -128,17 +128,17 @@ class Tree:
 
     def evaluate(self, index=0):
         size = self.length
-        child1 = 2*index + 1
-        child2 = 2*index + 2
-        if child1 >= size:
+        index_child1 = 2*index + 1
+        index_child2 = 2*index + 2
+        if index_child1 >= size:
             return self.nodes[index].values
-        elif self.nodes[child1].data_type == 'None':
+        elif self.nodes[index_child1].data_type == 'None':
             return self.nodes[index].values
         elif self.nodes[index].values.data_type == 'operator':
-            return self.nodes[index].values.operate(self.evaluate(child1),
-                                                    self.evaluate(child2)
+            return self.nodes[index].values.operate(self.evaluate(index_child1),
+                                                    self.evaluate(index_child2)
                                                     )
         else:
-            return self.nodes[index].values.evaluate(self.evaluate(child1),
-                                                     self.evaluate(child2)
+            return self.nodes[index].values.evaluate(self.evaluate(index_child1),
+                                                     self.evaluate(index_child2)
                                                      )
