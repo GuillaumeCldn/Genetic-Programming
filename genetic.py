@@ -83,9 +83,9 @@ def weight(list_trees):
         if isnan(fit_pop[i]):
             raise ValueError(f'list_trees: element of list_trees is nan')
     total_fit = sum(fit_pop)
-    weight_pop = [(int(100*(total_fit - fitness(tree))
+    weight_pop = [(int(100*(total_fit - fit_pop[i])
                        / ((size-1)*total_fit)),
-                   tree) for tree in list_trees
+                   list_trees[i]) for i in range(size)
                   ]
     return weight_pop
 
@@ -130,8 +130,7 @@ def genetic():
                                                                    )
                                   ])
         for chosen in chosen_mutate:
-            new_gen.append(evolve.mutate(
-                d.func_list, d.param_list, d.cst_list, chosen))
+            new_gen.append(evolve.mutate(chosen))
 
         num_fuse = int(d.family_size*d.fuse_rate)
 

@@ -75,12 +75,12 @@ def fuse(tree_ini, tree_add):
     return tree
 
 
-def mutate(func_list, param_list, cst_list, tree_ini):
+def mutate(tree_ini):
     tree = ob.Tree(f'{tree_ini.name}_mutate')
     tree.nodes = tree_ini.nodes[:]
     tree.update_param()
     sub_tree = ob.Tree(f'{tree_ini.name}_1')
-    sub_tree.grow(func_list, param_list, cst_list, rd.randint(2, 4))
+    sub_tree.grow(d.func_list, d.param_list, d.cst_list, rd.randint(2, 4))
     sub_tree.delete_line()
     sub_tree.update_param()
 
