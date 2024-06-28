@@ -7,12 +7,14 @@ Created on Thu Nov 23 13:52:31 2023
 
 import random as rd
 import numpy as np
+from functools import lru_cache
+from copy import deepcopy
 
 
 class Node:
     def __init__(self, data_type, symbol, values):
-        self.symbol = symbol
         self.data_type = data_type
+        self.symbol = symbol
         self.values = values
 
     def __repr__(self):
@@ -54,13 +56,12 @@ class Tree:
         return (cp - 1) // 2
 
     def copy(self):
-        tree = Tree(f'{self.name}_fuse')
-        tree.nodes = self.nodes[:]
+        tree = Tree(f'{self.name}_copy')
+        tree.nodes = deepcopy(self.nodes)
         tree.update_param()
         return tree
 
     def delete_line(tree):
-        size_tree = tree.length
         depth_tree = tree.depth
         while all(tree.nodes[k].data_type == 'None'
                   for k in range(int(2**(depth_tree)-1),
@@ -126,6 +127,7 @@ class Tree:
         self.depth = depth
         self.length = len(self.nodes)
 
+    @lru_cache(maxsize=None)
     def evaluate(self, index=0):
         size = self.length
         index_child1 = 2*index + 1
