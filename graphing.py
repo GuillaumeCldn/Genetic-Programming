@@ -22,7 +22,6 @@ def draw_tree(tree):
     Returns
     -------
     None.
-
     """
     n = tree.length
     n_vertices = 1
@@ -79,7 +78,6 @@ def draw_function(tree, param_list, Y_ref):
     Returns
     -------
     None.
-
     """
     n = len(param_list[0].values)
     X = param_list[0].values
