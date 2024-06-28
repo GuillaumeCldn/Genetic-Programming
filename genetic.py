@@ -27,43 +27,7 @@ def generate_population(family_size, mode):
 
 
 def fitness(tree):
-    return sum(np.abs(d.Y_ref-tree.evaluate()))
-
-
-testTree = ob.Tree('test')
-testTree.nodes = [ob.Node('function', '@', op.divOperator), 
-                  ob.Node('function', '-', op.subsOperator), 
-                  ob.Node('function', '-', op.subsOperator), 
-                  ob.Node('function', '-', op.subsOperator), 
-                  ob.Node('function', 'sin', op.fonction_sin), 
-                  ob.Node('function', '-', op.subsOperator), 
-                  ob.Node('function', '-', op.subsOperator), 
-                  ob.Node('constant', str(-2), -2), 
-                  ob.Node('constant', str(-5), -5), 
-                  ob.Node('parameter', 'x', np.linspace(-np.pi/2, np.pi/2, 500)), 
-                  ob.Node('parameter', 'x', np.linspace(-np.pi/2, np.pi/2, 500)), 
-                  ob.Node('function', '-', op.subsOperator), 
-                  ob.Node('function', 'sin', op.fonction_sin), 
-                  ob.Node('constant', str(-2), -2), 
-                  ob.Node('constant', str(-5), -5), 
-                  ob.Node('None', 'Ø', None), 
-                  ob.Node('None', 'Ø', None), 
-                  ob.Node('None', 'Ø', None), 
-                  ob.Node('None', 'Ø', None), 
-                  ob.Node('None', 'Ø', None), 
-                  ob.Node('None', 'Ø', None), 
-                  ob.Node('None', 'Ø', None), 
-                  ob.Node('None', 'Ø', None),  
-                  ob.Node('constant', str(-2), -2), 
-                  ob.Node('constant', str(-5), -5), 
-                  ob.Node('parameter', 'x', np.linspace(-np.pi/2, np.pi/2, 500)), 
-                  ob.Node('parameter', 'x', np.linspace(-np.pi/2, np.pi/2, 500)), 
-                  ob.Node('None', 'Ø', None), 
-                  ob.Node('None', 'Ø', None), 
-                  ob.Node('None', 'Ø', None), 
-                  ob.Node('None', 'Ø', None) 
-                  ]
-testTree.update_param()
+    return sum(np.abs(d.Y_ref-tree.evaluate()))   
 
 def tournament(list_tree):
     k = rd.randint(1, len(list_tree))
@@ -164,18 +128,19 @@ def genetic():
 
 
 if __name__ == "__main__":
-#    print(testTree)
-#    gr.draw_tree(testTree)
-#    gr.draw_function(testTree, d.param_list, d.Y_ref)
-    eval_array = testTree.evaluate()
+    print(d.testTree2)
+    gr.draw_tree(d.testTree2)
+    gr.draw_function(d.testTree2, d.param_list, d.Y_ref)
+    eval_array = d.testTree2.evaluate()
     print(f'{eval_array=}')
-    print('-'*80)
-    epsilon_array = d.Y_ref[1:-1]-eval_array[1:-1]
-    print(f'{epsilon_array=}')
-    print('-'*80)
-    fitness_array = sum(np.abs(epsilon_array))
-    print(f'{fitness(testTree)=}')
-    print(f'{fitness_array=}')
+#    print('-'*80)
+#    epsilon_array = d.Y_ref[1:-1]-eval_array[1:-1]
+#    print(f'{epsilon_array=}')
+#    print('-'*80)
+#    fitness_array = sum(np.abs(epsilon_array))
+    print(f'{fitness(d.testTree2)=}')
+#    print(f'{fitness_array=}')
+
 #    data1, data2 = genetic()
 #    gr.draw_tree(data1)
 #    gr.draw_function(data1, d.param_list, d.Y_ref)
