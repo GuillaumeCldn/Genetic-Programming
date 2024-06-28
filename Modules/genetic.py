@@ -12,9 +12,9 @@ import objects as ob
 import graphing as gr
 import matplotlib.pyplot as plt
 import data as d
+from math import isnan
 
-
-def generate_population(family_size, mode):
+def generate_population(family_size, mode=1):
     init_pop = [ob.Tree(i) for i in range(family_size)]
     if mode == 1:
         for tree in init_pop:
@@ -26,8 +26,7 @@ def generate_population(family_size, mode):
 
 
 def fitness(tree):
-    return sum(np.abs(d.Y_ref-tree.evaluate()))
-
+    return sum(np.abs(d.Y_ref-tree.evaluate()))   
 
 def tournament(list_tree):
     k = rd.randint(1, len(list_tree))
@@ -40,21 +39,22 @@ def tournament(list_tree):
     return min_fit(chosen_keep)
 
 
-def weight(list_tree):
-    size = len(list_tree)
-    fit_pop = [fitness(list_tree[i]) for i in range(size)]
+def weight(list_trees):
+    size = len(list_trees)
+    fit_pop = [fitness(tree) for tree in list_trees]
+    for i in range(len(fit_pop)):
+        if isnan(fit_pop[i]):
+            raise ValueError(f'list_trees: element of list_trees is nan')
     total_fit = sum(fit_pop)
-    weight_pop = [(int(100*(total_fit - fitness(list_tree[i]))
+    weight_pop = [(int(100*(total_fit - fit_pop[i])
                        / ((size-1)*total_fit)),
-                   list_tree[i]) for i in range(size)
+                   list_trees[i]) for i in range(size)
                   ]
     return weight_pop
 
 
 def min_fit(pop):
-    if not pop:
-        raise ValueError("pop (arg of min_fit()) list is empty")
-    fit_pop = [(fitness(pop[i]), i, pop[i]) for i in range(len(pop))]
+    fit_pop = [(fitness(tree), i, tree) for i, tree in enumerate(pop)]
     minfit = min(fit_pop)
     return minfit
 
@@ -91,8 +91,7 @@ def genetic():
                                                                    )
                                   ])
         for chosen in chosen_mutate:
-            new_gen.append(evolve.mutate(
-                d.func_list, d.param_list, d.cst_list, chosen))
+            new_gen.append(evolve.mutate(chosen))
 
         num_fuse = int(d.family_size*d.fuse_rate)
 
@@ -126,6 +125,19 @@ def genetic():
 
 
 if __name__ == "__main__":
+    print(d.testTree2)
+    gr.draw_tree(d.testTree2)
+    gr.draw_function(d.testTree2, d.param_list, d.Y_ref)
+    eval_array = d.testTree2.evaluate()
+    print(f'{eval_array=}')
+#    print('-'*80)
+#    epsilon_array = d.Y_ref[1:-1]-eval_array[1:-1]
+#    print(f'{epsilon_array=}')
+#    print('-'*80)
+#    fitness_array = sum(np.abs(epsilon_array))
+    print(f'{fitness(d.testTree2)=}')
+#    print(f'{fitness_array=}')
+
     data1, data2 = genetic()
     gr.draw_tree(data1)
     gr.draw_function(data1, d.param_list, d.Y_ref)
