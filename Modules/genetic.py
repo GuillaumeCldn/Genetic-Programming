@@ -12,10 +12,9 @@ import objects as ob
 import graphing as gr
 import matplotlib.pyplot as plt
 import data as d
-import operation as op
 from math import isnan
 
-def generate_population(family_size, mode):
+def generate_population(family_size, mode=1):
     init_pop = [ob.Tree(i) for i in range(family_size)]
     if mode == 1:
         for tree in init_pop:
@@ -55,9 +54,7 @@ def weight(list_trees):
 
 
 def min_fit(pop):
-    if not pop:
-        raise ValueError("pop (arg of min_fit()) list is empty")
-    fit_pop = [(fitness(pop[i]), i, pop[i]) for i in range(len(pop))]
+    fit_pop = [(fitness(tree), i, tree) for i, tree in enumerate(pop)]
     minfit = min(fit_pop)
     return minfit
 
@@ -141,9 +138,9 @@ if __name__ == "__main__":
     print(f'{fitness(d.testTree2)=}')
 #    print(f'{fitness_array=}')
 
-#    data1, data2 = genetic()
-#    gr.draw_tree(data1)
-#    gr.draw_function(data1, d.param_list, d.Y_ref)
-#    X2 = [i for i in range(len(data2))]
-#    plt.plot(X2, data2)
-#    plt.show()
+    data1, data2 = genetic()
+    gr.draw_tree(data1)
+    gr.draw_function(data1, d.param_list, d.Y_ref)
+    X2 = [i for i in range(len(data2))]
+    plt.plot(X2, data2)
+    plt.show()
