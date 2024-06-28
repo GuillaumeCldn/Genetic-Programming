@@ -8,6 +8,7 @@ Created on Wed Dec 20 19:43:39 2023
 import random as rd
 import objects as ob
 import data as d
+from copy import deepcopy
 
 
 def fuse(tree_ini, tree_add):
@@ -26,7 +27,7 @@ def fuse(tree_ini, tree_add):
         cp = rd.randint(0, max_cp)  # crossover point
         while tree.nodes[cp].data_type == 'None':
             cp = rd.randint(0, max_cp)
-
+    print('f_1')
     cp_depth = tree.get_depth(cp)
     max_depth_t_add = d.max_depth - cp_depth
     min_cp_add = 2**(t_add.depth - max_depth_t_add) - 1
@@ -36,19 +37,19 @@ def fuse(tree_ini, tree_add):
     firs_el_last_level_t_add = 2**t_add.depth - 1
     max_cp_add = firs_el_last_level_t_add - 1
     cp_add = rd.randint(min_cp_add, max_cp_add)
-
     while (t_add.nodes[cp_add].data_type == 'None'
            ) or (t_add.nodes[cp_add].data_type == 'constant'
                  ) or (t_add.nodes[cp_add].data_type == 'parameter'
+    print('f_2')
                        ):
         cp_add = rd.randint(min_cp_add, max_cp_add)
-
+    print('f_3')
     children_add = t_add.get_children(cp_add)
     t_add.nodes = []
     for i in range(len(children_add)):
         t_add.nodes.append(tree_add.nodes[children_add[i]])
     t_add.update_param()
-
+    print('f_4')
     children = tree.get_children(cp)
     n_ch = len(children)
     n_ta = t_add.length
@@ -69,19 +70,21 @@ def fuse(tree_ini, tree_add):
     else:
         for i in range(n_ch):
             tree.nodes[children[i]] = t_add.nodes[i]
-
+    print('f_5')
     tree.delete_line()
     tree.update_param()
+    tree.name = f'{tree_ini.name}-{tree_add.name}'
     return tree
 
 
 def mutate(tree_ini):
-    tree = ob.Tree(f'{tree_ini.name}_mutate')
-    tree.nodes = tree_ini.nodes[:]
+    tree = ob.Tree(f'{tree_ini.name}_m')
+    tree.nodes = deepcopy(tree_ini.nodes)
     tree.update_param()
-    sub_tree = ob.Tree(f'{tree_ini.name}_1')
+    print('m_1')
+    sub_tree = ob.Tree(f'{tree_ini.name}_-G')
     sub_tree.grow(d.func_list, d.param_list, d.cst_list, rd.randint(2, 4))
     sub_tree.delete_line()
     sub_tree.update_param()
-
+    print('m_2')
     return fuse(tree, sub_tree)

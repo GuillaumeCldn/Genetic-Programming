@@ -8,6 +8,7 @@ Created on Tue Nov 28 14:04:29 2023
 
 import igraph as ig
 import matplotlib.pyplot as plt
+import objects as ob
 
 
 def draw_tree(tree):
@@ -51,7 +52,7 @@ def draw_tree(tree):
     ax.invert_yaxis()
     ig.plot(graph,
             target=ax,
-            vertex_label=graph.vs[:n_vertices]["symbol"],
+            vertex_label=graph.vs[:n_vertices]['symbol'],
             layout='rt',
             vertex_color=['steelblue' if root else 'white'
                           for root in graph.vs['root']]
