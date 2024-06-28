@@ -12,7 +12,8 @@ import objects as ob
 import graphing as gr
 import matplotlib.pyplot as plt
 import data as d
-
+import operation as op
+from math import isnan
 
 def generate_population(family_size, mode):
     init_pop = [ob.Tree(i) for i in range(family_size)]
@@ -29,6 +30,41 @@ def fitness(tree):
     return sum(np.abs(d.Y_ref-tree.evaluate()))
 
 
+testTree = ob.Tree('test')
+testTree.nodes = [ob.Node('function', '@', op.divOperator), 
+                  ob.Node('function', '-', op.subsOperator), 
+                  ob.Node('function', '-', op.subsOperator), 
+                  ob.Node('function', '-', op.subsOperator), 
+                  ob.Node('function', 'sin', op.fonction_sin), 
+                  ob.Node('function', '-', op.subsOperator), 
+                  ob.Node('function', '-', op.subsOperator), 
+                  ob.Node('constant', str(-2), -2), 
+                  ob.Node('constant', str(-5), -5), 
+                  ob.Node('parameter', 'x', np.linspace(-np.pi/2, np.pi/2, 500)), 
+                  ob.Node('parameter', 'x', np.linspace(-np.pi/2, np.pi/2, 500)), 
+                  ob.Node('function', '-', op.subsOperator), 
+                  ob.Node('function', 'sin', op.fonction_sin), 
+                  ob.Node('constant', str(-2), -2), 
+                  ob.Node('constant', str(-5), -5), 
+                  ob.Node('None', 'Ø', None), 
+                  ob.Node('None', 'Ø', None), 
+                  ob.Node('None', 'Ø', None), 
+                  ob.Node('None', 'Ø', None), 
+                  ob.Node('None', 'Ø', None), 
+                  ob.Node('None', 'Ø', None), 
+                  ob.Node('None', 'Ø', None), 
+                  ob.Node('None', 'Ø', None),  
+                  ob.Node('constant', str(-2), -2), 
+                  ob.Node('constant', str(-5), -5), 
+                  ob.Node('parameter', 'x', np.linspace(-np.pi/2, np.pi/2, 500)), 
+                  ob.Node('parameter', 'x', np.linspace(-np.pi/2, np.pi/2, 500)), 
+                  ob.Node('None', 'Ø', None), 
+                  ob.Node('None', 'Ø', None), 
+                  ob.Node('None', 'Ø', None), 
+                  ob.Node('None', 'Ø', None) 
+                  ]
+testTree.update_param()
+
 def tournament(list_tree):
     k = rd.randint(1, len(list_tree))
     weight_pop = weight(list_tree)
@@ -40,13 +76,16 @@ def tournament(list_tree):
     return min_fit(chosen_keep)
 
 
-def weight(list_tree):
-    size = len(list_tree)
-    fit_pop = [fitness(list_tree[i]) for i in range(size)]
+def weight(list_trees):
+    size = len(list_trees)
+    fit_pop = [fitness(tree) for tree in list_trees]
+    for i in range(len(fit_pop)):
+        if isnan(fit_pop[i]):
+            raise ValueError(f'list_trees: element of list_trees is nan')
     total_fit = sum(fit_pop)
-    weight_pop = [(int(100*(total_fit - fitness(list_tree[i]))
+    weight_pop = [(int(100*(total_fit - fitness(tree))
                        / ((size-1)*total_fit)),
-                   list_tree[i]) for i in range(size)
+                   tree) for tree in list_trees
                   ]
     return weight_pop
 
@@ -126,9 +165,21 @@ def genetic():
 
 
 if __name__ == "__main__":
-    data1, data2 = genetic()
-    gr.draw_tree(data1)
-    gr.draw_function(data1, d.param_list, d.Y_ref)
-    X2 = [i for i in range(len(data2))]
-    plt.plot(X2, data2)
-    plt.show()
+#    print(testTree)
+#    gr.draw_tree(testTree)
+#    gr.draw_function(testTree, d.param_list, d.Y_ref)
+    eval_array = testTree.evaluate()
+    print(f'{eval_array=}')
+    print('-'*80)
+    epsilon_array = d.Y_ref[1:-1]-eval_array[1:-1]
+    print(f'{epsilon_array=}')
+    print('-'*80)
+    fitness_array = sum(np.abs(epsilon_array))
+    print(f'{fitness(testTree)=}')
+    print(f'{fitness_array=}')
+#    data1, data2 = genetic()
+#    gr.draw_tree(data1)
+#    gr.draw_function(data1, d.param_list, d.Y_ref)
+#    X2 = [i for i in range(len(data2))]
+#    plt.plot(X2, data2)
+#    plt.show()
