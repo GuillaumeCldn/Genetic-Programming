@@ -27,13 +27,6 @@ func_list = [ob.Node('function', '+', op.addOperator),
              ]
 
 
-def protect_div(a, b):
-    if b == 0:
-        return 1
-    else:
-        return a/b
-
-
 X = ob.Node('parameter', 'x', np.linspace(-np.pi/2, np.pi/2, 500))
 param_list = [X]
 Y_ref = np.sin(X.values)**2 + np.sin(X.values) + 1
