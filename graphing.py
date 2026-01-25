@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 
 def draw_tree(tree):
     """
-    Draws the graph correspponding to the tree.
+    Draws the graph corresponding to the tree.
 
     Parameters
     ----------
@@ -72,7 +72,7 @@ def draw_function(tree, param_list, Y_ref):
         The list of parameters to be taken into account.
         Defined in data.py
     Y_ref : numpy.ndarray
-        Array containing values of the refence function.
+        Array containing values of the reference function.
         Defined in data.py
 
     Returns

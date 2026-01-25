@@ -78,7 +78,7 @@ def genetic():
 
         if it >= d.max_it:
             print(f'max iteration reached: {it}, fitness = {fit[-1]})')
-            return (best_tree2, fit)
+            return best_tree2, fit
 
         for tree in pop:
             tree.delete_line()
@@ -122,7 +122,7 @@ def genetic():
             gr.draw_tree(best_tree2)
             gr.draw_function(best_tree2, d.param_list, d.Y_ref)
 
-    return (best_tree2, fit)
+    return best_tree2, fit
 
 
 if __name__ == "__main__":
