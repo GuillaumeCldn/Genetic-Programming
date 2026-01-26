@@ -11,8 +11,8 @@ import numpy as np
 
 class Node:
     def __init__(self, data_type, symbol, values):
-        self.symbol = symbol
         self.data_type = data_type
+        self.symbol = symbol
         self.values = values
 
     def __repr__(self):
