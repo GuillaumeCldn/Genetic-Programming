@@ -50,7 +50,7 @@ class Tree:
         children.sort()
         return children
 
-    def get_parent_num(cp):
+    def get_parent_num(self, cp):
         return (cp - 1) // 2
 
     def copy(self):
