@@ -119,7 +119,7 @@ class Operator:
         return self.f(a, b)
 
 
-def adition(a, b):
+def addition(a, b):
     return a+b
 
 
@@ -135,7 +135,7 @@ def division(a, b):
     return a*fonction_inverse_protege.evaluate(b, 0)
 
 
-addOperator = Operator(adition)
+addOperator = Operator(addition)
 subsOperator = Operator(soustraction)
 multOperator = Operator(multiplication)
 divOperator = Operator(division)
