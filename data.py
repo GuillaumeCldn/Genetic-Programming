@@ -23,13 +23,13 @@ func_list = [ob.Node('function', '+', op.addOperator),
              ob.Node('function', '-', op.subsOperator),
              ob.Node('function', '*', op.multOperator),
              ob.Node('function', '@', op.divOperator),
-             ob.Node('function', 'sin', op.fonction_sin)
+             # ob.Node('function', 'sin', op.fonction_sin)
              ]
 
 
 X = ob.Node('parameter', 'x', np.linspace(-np.pi/2, np.pi/2, 500))
 param_list = [X]
-Y_ref = np.sin(X.values)**2 + np.sin(X.values) + 1
+Y_ref = (X.values)**3 - (X.values)**2 + (X.values) + 1
 cst_list = constants(-5, 5, 10)
 
 family_size = 15
