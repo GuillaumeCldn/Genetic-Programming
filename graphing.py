@@ -57,7 +57,8 @@ def draw_tree(tree, save=False, fig_name=None):
                           for root in graph.vs['root']]
             )
     if save:
-        plt.savefig(fig_name)
+        fig.savefig(fig_name)
+        plt.close()
     else:
         plt.show()
 
@@ -96,5 +97,6 @@ def draw_function(tree, param_list, Y_ref, save=False, fig_name=None):
     plt.legend()
     if save:
         plt.savefig(fig_name)
+        plt.close()
     else:
         plt.show()
