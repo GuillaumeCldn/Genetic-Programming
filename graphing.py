@@ -10,7 +10,7 @@ import igraph as ig
 import matplotlib.pyplot as plt
 
 
-def draw_tree(tree):
+def draw_tree(tree, save=False, fig_name=None):
     """
     Draws the graph corresponding to the tree.
 
@@ -56,10 +56,13 @@ def draw_tree(tree):
             vertex_color=['steelblue' if root else 'white'
                           for root in graph.vs['root']]
             )
-    plt.show()
+    if save:
+        plt.savefig(fig_name)
+    else:
+        plt.show()
 
 
-def draw_function(tree, param_list, Y_ref):
+def draw_function(tree, param_list, Y_ref, save=False, fig_name=None):
     """
     Draws the function corresponding to the tree, as well as the reference.
 
@@ -91,4 +94,7 @@ def draw_function(tree, param_list, Y_ref):
     plt.ylabel('y')
     plt.title('comparative graph')
     plt.legend()
-    plt.show()
+    if save:
+        plt.savefig(fig_name)
+    else:
+        plt.show()

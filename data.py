@@ -22,7 +22,7 @@ def constants(min_cst, max_cst, total_cst):
 func_list = [ob.Node('function', '+', op.addOperator),
              ob.Node('function', '-', op.subsOperator),
              ob.Node('function', '*', op.multOperator),
-             ob.Node('function', '@', op.divOperator),
+             # ob.Node('function', '@', op.divOperator),
              # ob.Node('function', 'sin', op.fonction_sin)
              ]
 
@@ -43,3 +43,5 @@ mutate_rate = 0.5
 fuse_rate = 0.25
 drawing_display_rate = 4
 iteration_display_rate = 25
+
+plot_dir = "./plots/"
