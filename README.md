@@ -66,6 +66,7 @@ The algorithm stops when the best solution reaches the accuracy threshold or whe
 ### Fitness definition
 
 The fitness is the sum of absolute errors over the sampled domain:
+
 $$
 \text{fitness(tree)} = \sum |Y_{\text{ref}} - Y_{\text{tree}}|
 $$
