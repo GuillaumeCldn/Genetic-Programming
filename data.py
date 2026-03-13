@@ -22,12 +22,12 @@ def constants(min_cst, max_cst, total_cst):
 func_list = [ob.Node('function', '+', op.addOperator),
              ob.Node('function', '-', op.subsOperator),
              ob.Node('function', '*', op.multOperator),
-             ob.Node('function', '@', op.divOperator),
+             # ob.Node('function', '@', op.divOperator),
              # ob.Node('function', 'sin', op.fonction_sin)
              ]
 
 
-X = ob.Node('parameter', 'x', np.linspace(-np.pi/2, np.pi/2, 500))
+X = ob.Node('parameter', 'x', np.linspace(-1, 1, 500))
 param_list = [X]
 Y_ref = (X.values)**3 - (X.values)**2 + (X.values) + 1
 cst_list = constants(-5, 5, 10)
@@ -43,3 +43,5 @@ mutate_rate = 0.5
 fuse_rate = 0.25
 drawing_display_rate = 4
 iteration_display_rate = 25
+
+plot_dir = "./plots/"

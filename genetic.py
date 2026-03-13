@@ -119,16 +119,20 @@ def genetic():
         fit.append(fitness(best_tree2))
 
         if it % (d.max_it//d.drawing_display_rate) == 0:
-            gr.draw_tree(best_tree2)
-            gr.draw_function(best_tree2, d.param_list, d.Y_ref)
+            gr.draw_tree(best_tree2, True, f"{d.plot_dir}Tree_it{it}.png")
+            gr.draw_function(best_tree2, d.param_list, d.Y_ref, True, f"{d.plot_dir}Graph_it{it}.png")
 
     return best_tree2, fit
 
 
 if __name__ == "__main__":
     data1, data2 = genetic()
-    gr.draw_tree(data1)
-    gr.draw_function(data1, d.param_list, d.Y_ref)
+    gr.draw_tree(data1, True, f"{d.plot_dir}Tree_end.png")
+    gr.draw_function(data1, d.param_list, d.Y_ref, True, f"{d.plot_dir}Graph_end.png")
     X2 = [i for i in range(len(data2))]
-    plt.plot(X2, data2)
+    plt.plot(X2, data2, label='fitness')
+    plt.title('Fitness evolution')
+    plt.xlabel('iterations')
+    plt.legend()
+    plt.savefig(f"{d.plot_dir}Fitness")
     plt.show()
