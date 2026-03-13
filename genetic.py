@@ -130,6 +130,9 @@ if __name__ == "__main__":
     gr.draw_tree(data1, True, f"{d.plot_dir}Tree_end.png")
     gr.draw_function(data1, d.param_list, d.Y_ref, True, f"{d.plot_dir}Graph_end.png")
     X2 = [i for i in range(len(data2))]
-    plt.plot(X2, data2)
+    plt.plot(X2, data2, label='fitness')
+    plt.title('Fitness evolution')
+    plt.xlabel('iterations')
+    plt.legend()
     plt.savefig(f"{d.plot_dir}Fitness")
     plt.show()

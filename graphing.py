@@ -93,7 +93,7 @@ def draw_function(tree, param_list, Y_ref, save=False, fig_name=None):
     plt.plot(X, Y_ref, 'r--', label='reference')
     plt.xlabel(param_list[0].symbol)
     plt.ylabel('y')
-    plt.title('comparative graph')
+    plt.title('Comparative graph')
     plt.legend()
     if save:
         plt.savefig(fig_name)
