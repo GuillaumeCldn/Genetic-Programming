@@ -128,7 +128,7 @@ You can also edit:
 
 ## Outputs / Results
 
-Running `python genetic.py` produces interactive plots (no files are saved by default):
+Running `python genetic.py` produces interactive plots (files are saved by default to `./plots`):
 
 1. **Evolved expression tree** (structure plot)
 2. **Curve comparison**: best individual (blue) vs reference function (red dashed)
