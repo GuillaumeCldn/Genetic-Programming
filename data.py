@@ -27,7 +27,7 @@ func_list = [ob.Node('function', '+', op.addOperator),
              ]
 
 
-X = ob.Node('parameter', 'x', np.linspace(-np.pi/2, np.pi/2, 500))
+X = ob.Node('parameter', 'x', np.linspace(-1, 1, 500))
 param_list = [X]
 Y_ref = (X.values)**3 - (X.values)**2 + (X.values) + 1
 cst_list = constants(-5, 5, 10)
